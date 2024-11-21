@@ -1,0 +1,30 @@
+CREATE TABLE `clientes` (
+  `id` int(7) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(40) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `telefone` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cpf` (`cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `servicos` (
+  `id` int(7) NOT NULL AUTO_INCREMENT,
+  `nome_servico` varchar(40) NOT NULL,
+  `descricao` text(30) NOT NULL,
+  `preco` decimal(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `agendamentos` (
+    `id` int(7) AUTO_INCREMENT PRIMARY KEY,  
+    `id_cliente` int(7) NOT NULL AUTO_INCREMENT,                               
+    `id_servico` int(7) NOT NULL AUTO_INCREMENT,                                
+    `data_agendamento` DATETIME NOT NULL,             
+    `status` VARCHAR(20) NOT NULL,   
+    PRIMARY KEY (`id`),              
+    FOREIGN KEY (id_cliente) REFERENCES clientes(id) ON DELETE CASCADE,  
+    FOREIGN KEY (id_servico) REFERENCES servicos(id) ON DELETE CASCADE   
+);
